@@ -1,0 +1,275 @@
+{
+	"info": {
+		"_postman_id": "4a5536ed-bb33-44aa-a12d-d07201e97e6e",
+		"name": "SCV",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "BUY - OK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"done\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 40,\n    \"itemId\": \"a6\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://glacial-reef-23457.herokuapp.com/api/buy",
+					"protocol": "https",
+					"host": [
+						"glacial-reef-23457",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"buy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SELL - OK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"done\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 5,\n    \"itemId\": \"a1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://glacial-reef-23457.herokuapp.com/api/sell",
+					"protocol": "https",
+					"host": [
+						"glacial-reef-23457",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"sell"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET PORTFOLIO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"savings\");",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"investments\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"investments\": \"[]\",\n    \"savings\": 9810\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://glacial-reef-23457.herokuapp.com/api/user-portfolio",
+					"protocol": "https",
+					"host": [
+						"glacial-reef-23457",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user-portfolio"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SELL - No itemId",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 10876587657658,\n    \"itemId\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://glacial-reef-23457.herokuapp.com/api/sell",
+					"protocol": "https",
+					"host": [
+						"glacial-reef-23457",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"sell"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SELL - Invalid Amount",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"amount POST param should be a number.\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": \"j\",\n    \"itemId\": \"kjh\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://glacial-reef-23457.herokuapp.com/api/sell",
+					"protocol": "https",
+					"host": [
+						"glacial-reef-23457",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"sell"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SELL - Invalid itemId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"itemId POST param should be a string.\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 9,\n    \"itemId\": 98\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://glacial-reef-23457.herokuapp.com/api/sell",
+					"protocol": "https",
+					"host": [
+						"glacial-reef-23457",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"sell"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
